@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import AddNewProjectComponent from "./AddNewProjectComponent";
 import CardComponent from "./CardComponent";
 
-export default function AssignmentsComponent() {
-  const [projects, setProjects] = useState([]);
+export default function AssignmentsComponent({projects, setProjects}) {
+  // const [projects, setProjects] = useState([
+
+  // ]);
+
+  console.log("projects ", projects)
+
   const handleAddProject = (newProject) => {
     setProjects([...projects, newProject])
   }

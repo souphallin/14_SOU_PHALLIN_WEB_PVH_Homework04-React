@@ -3,7 +3,7 @@ import {dashboard} from '../data/dashboard'
 import {learningMaterials} from '../data/learningMaterials'
 
 export default function DashboardComponent() {
-  console.log(dashboard);
+  // console.log(dashboard);
   return (
     <div>
       <h2 className="text-xl font-semibold mb-5">Dashboard</h2>

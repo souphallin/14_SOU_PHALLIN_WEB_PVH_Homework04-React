@@ -13,7 +13,7 @@ export default function CardComponent({product, countDate}) {
     if(progress===100) return "#59D5E0"
     return "#55edb8"; // Default Gray
   }
-  console.log("Progress value type:", typeof product.progress, product.progress);
+  // console.log("Progress value type:", typeof product.progress, product.progress);
 
   return (
     <div>
