@@ -7,11 +7,20 @@ import {format} from 'date-fns'
 export default function LearningMaterialsComponent() {
   console.log(learningMaterials)
   const [materials, setSortedMaterials] = useState(learningMaterials);
-  const handleSortMaterials = (sortedMaterials) => {
-    console.log(sortedMaterials);
-    
-    setSortedMaterials(sortedMaterials);
+  const handleSortMaterials = (NewSortedMaterials) => {
+    console.log(NewSortedMaterials);
+    setSortedMaterials(NewSortedMaterials);
   }
+
+  function handleStar(id) {
+    alert("Teacher ជួយ fix code ញុមមួយមក function ដើរតែកូដអត់ដើរ Teacher!!!")
+    setSortedMaterials((prevSt) => {
+      return prevSt.map((item) => 
+        item.id === id ? {...item, isFavorite : !item.isFavorite} : item
+      )
+    });
+  }
+
   return (
     <div className="bg-white drop-shadow-lg rounded-2xl overflow-auto h-[80vh]">
       {/* calling filter component */}
@@ -38,7 +47,12 @@ export default function LearningMaterialsComponent() {
             <div className="w-full">
               <div className="flex justify-between">
                 <p className="text-base font-medium">{item.title}</p>
-                <Star size={20} />
+                <Star 
+                onClick={()=>handleStar(materials.id)}
+                  color={materials.isFavorite ?"FAA300" : "black"}
+                  fill={materials.isFavorite ? "#FAA300" : "white"}
+                
+                size={20} />
               </div>
               <p className="text-gray-400 text-sm">Posted at: {format(new Date(item.postedAt), "EEE, MMM dd, yyyy")}</p>
             </div>
