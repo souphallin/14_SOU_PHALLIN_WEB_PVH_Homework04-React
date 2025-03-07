@@ -1,30 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import FilterComponent from "./FilterComponent";
-import {learningMaterials} from '../data/learningMaterials'
-import {format} from 'date-fns'
+import { learningMaterials } from "../data/learningMaterials";
+import { format, lastDayOfISOWeek } from "date-fns";
 
 export default function LearningMaterialsComponent() {
-  console.log(learningMaterials)
+  // console.log(learningMaterials);
   const [materials, setSortedMaterials] = useState(learningMaterials);
   const handleSortMaterials = (NewSortedMaterials) => {
-    console.log(NewSortedMaterials);
+    // console.log(NewSortedMaterials);
     setSortedMaterials(NewSortedMaterials);
-  }
+  };
 
   function handleStar(id) {
-    alert("Teacher ជួយ fix code ញុមមួយមក function ដើរតែកូដអត់ដើរ Teacher!!!")
+    // alert("Teacher ជួយ fix code ញុមមួយមក function ដើរតែកូដអត់ដើរ Teacher!!!");
     setSortedMaterials((prevSt) => {
-      return prevSt.map((item) => 
-        item.id === id ? {...item, isFavorite : !item.isFavorite} : item
-      )
+      return prevSt.map((item) =>
+        item.id === id ? { ...item, isFavorite: !item.isFavorite } : item
+      );
     });
   }
 
+  useEffect(() => {
+    console.log(materials);
+  }, [materials])
+
   return (
-    <div className="bg-white drop-shadow-lg rounded-2xl overflow-auto h-[80vh]">
+    <div className="bg-white drop-shadow-lg rounded-2xl overflow-auto h-[80vh] no-scrollbar">
       {/* calling filter component */}
-      <FilterComponent handleSortMaterials={handleSortMaterials}/>
+      <FilterComponent handleSortMaterials={handleSortMaterials} materials={materials}/>
 
       {/* title */}
       <div className="p-4 flex justify-between items-center">
@@ -34,7 +38,7 @@ export default function LearningMaterialsComponent() {
 
       {/* materials list */}
       {materials.map((item) => (
-        <div className="space-y-3">
+        <div key={item.id} className="space-y-3">
           <div className="bg-light-gray px-4 py-2 flex gap-5 items-center">
             <img
               src={item.image}
@@ -47,14 +51,17 @@ export default function LearningMaterialsComponent() {
             <div className="w-full">
               <div className="flex justify-between">
                 <p className="text-base font-medium">{item.title}</p>
-                <Star 
-                onClick={()=>handleStar(materials.id)}
-                  color={materials.isFavorite ?"FAA300" : "black"}
-                  fill={materials.isFavorite ? "#FAA300" : "white"}
-                
-                size={20} />
+                <Star
+                  onClick={() => handleStar(item.id)}
+                  color={item.isFavorite ? "#FAA300" : "black"}
+                  fill={item.isFavorite ? "#FAA300" : "white"}
+                  size={20}
+                />
               </div>
-              <p className="text-gray-400 text-sm">Posted at: {format(new Date(item.postedAt), "EEE, MMM dd, yyyy")}</p>
+              <p className="text-gray-400 text-sm">
+                Posted at:{" "}
+                {format(new Date(item.postedAt), "EEE, MMM dd, yyyy")}
+              </p>
             </div>
           </div>
         </div>

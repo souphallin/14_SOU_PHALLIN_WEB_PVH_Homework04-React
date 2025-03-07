@@ -9,9 +9,9 @@ export default function DashboardComponent() {
       <h2 className="text-xl font-semibold mb-5">Dashboard</h2>
 
       {/* display summary on each card */}
-      <div className="flex">
+      <div className="flex gap-5">
         {dashboard.map((item) => (
-          <div className="flex bg-white gap-5 py-3.5 px-4 rounded-xl w-auto">
+          <div key={item.id} className="flex bg-white gap-5 py-3.5 px-4 rounded-xl w-auto">
             <div className={`p-3 rounded-xl ${item.color}`}>
               <img src={item.icon} alt="file icon" />
             </div>

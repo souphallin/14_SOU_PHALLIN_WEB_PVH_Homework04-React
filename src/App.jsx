@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <div className="grid grid-cols-10">
+      <div className="grid grid-cols-10 overflow-hidden h-screen">
         <div className="col-span-2">
           <SidebarComponent />
         </div>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { learningMaterials } from '../data/learningMaterials';
 
-export default function FilterComponent({handleSortMaterials}) {
+export default function FilterComponent({handleSortMaterials, materials}) {
   // const [isAscending, setIsAscending] = useState(true); // Initial sorting state
-  const [sortedMaterials, setSortedMaterials] = useState(learningMaterials);
+  const [sortedMaterials, setSortedMaterials] = useState(materials);
+
+  console.log("materials in filter: " , materials);
+  
 
   // Prevent the page from reloading on form submit
   const handleSubmit = (e) => {
@@ -12,23 +15,24 @@ export default function FilterComponent({handleSortMaterials}) {
 
   // Sorting logic based on selected option
   const handleSortChange = (e) => {
-    const sortOption = e.target.value;
-    // console.log(e.target.value)
+    // const sortOption = e.target.value;
+    console.log(e.target.value)
 
     let sorted;
-    if (sortOption === "A-Z") {
-      console.log(e.target.value)
+    if (e.target.value === "A-Z") {
+      // console.log(e.target.value)
       sorted = [...sortedMaterials].sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortOption === "Z-A") {
+    } else if (e.target.value === "Z-A") {
       sorted = [...sortedMaterials].sort((a, b) => b.title.localeCompare(a.title));
     }
 
     setSortedMaterials(sorted); // Update the state with the sorted array
+    handleSortMaterials(sorted)
   };
 
   useEffect(() => {
-    handleSortMaterials(sortedMaterials);
-  }, [sortedMaterials])
+    setSortedMaterials(materials);
+  }, [materials])
 
   return (
     <div>

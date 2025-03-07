@@ -10,6 +10,8 @@ export default function AssignmentsComponent({projects, setProjects}) {
   console.log("projects ", projects)
 
   const handleAddProject = (newProject) => {
+    // console.log(newProject);
+    
     setProjects([...projects, newProject])
   }
   return (
@@ -21,7 +23,7 @@ export default function AssignmentsComponent({projects, setProjects}) {
       </div>
 
       {/* display added project */}
-      <div className="pt-10 grid grid-cols-3 gap-5">
+      <div className="pt-10 grid grid-cols-3 gap-5 overflow-auto h-[60vh] no-scrollbar">
         {projects.length> 0 ? (
           projects.map((project) =>(
             // <CardComponent key={project.id} product={project} countDate={project.countDate}/>
